@@ -1,0 +1,33 @@
+import random
+
+def noReplacementSimulation(numTrials):
+    '''
+    Runs numTrials trials of a Monte Carlo simulation
+    of drawing 3 balls out of a bucket containing
+    3 red and 3 green balls. Balls are not replaced once
+    drawn. Returns the a decimal - the fraction of times 3 
+    balls of the same color were drawn.
+    '''
+    results = []
+    same = 0
+    for i in range(numTrials):
+        results.append(sim())
+    
+    for i in range(len(results)):
+        if results[i] == True:
+            same +=1
+            
+    return same/float(numTrials)
+    
+def sim():
+    bucket = [1,1,1,0,0,0]
+    picks = []
+    choice = 0
+    for pick in range(3):
+        choice = random.choice(bucket)
+        picks.append(choice)
+        bucket.remove(choice)
+    if picks == [0,0,0] or picks == [1,1,1]:
+        return True
+    else:
+        return False
